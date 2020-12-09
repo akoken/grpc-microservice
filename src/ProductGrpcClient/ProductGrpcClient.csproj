@@ -5,4 +5,19 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.14.0" />
+    <PackageReference Include="Grpc.Net.ClientFactory" Version="2.33.1" />
+    <PackageReference Include="Grpc.Tools" Version="2.34.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="..\ProductGrpc\Protos\product.proto" GrpcServices="Client">
+      <Link>Protos\product.proto</Link>
+    </Protobuf>
+  </ItemGroup>
+
 </Project>
