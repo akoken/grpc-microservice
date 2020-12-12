@@ -11,7 +11,7 @@ namespace ProductGrpcClient
         static async Task Main(string[] args)
         {
             Console.WriteLine("Waiting for server is running.");
-            Thread.Sleep(2000);
+            Thread.Sleep(3000);
 
             using var channel = GrpcChannel.ForAddress("https://localhost:5001");
             var client = new ProductProtoService.ProductProtoServiceClient(channel);
@@ -23,7 +23,7 @@ namespace ProductGrpcClient
             });
 
             Console.WriteLine("GetProductAsync response: " + response.ToString());
-            Console.ReadLine();
+            Console.Read();
         }
     }
 }
