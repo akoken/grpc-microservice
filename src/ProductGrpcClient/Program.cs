@@ -23,6 +23,17 @@ namespace ProductGrpcClient
             });
 
             Console.WriteLine("GetProductAsync response: " + response.ToString());
+
+            Console.WriteLine("GetAllProducts started...");
+            using (var clientData = client.GetAllProducts(new GetAllProductsRequest()))
+            {
+                while (await clientData.ResponseStream.MoveNext(new CancellationToken()))
+                {
+                    ProductModel currentProduct = clientData.ResponseStream.Current;
+                    Console.WriteLine(currentProduct);
+                }
+            }
+
             Console.Read();
         }
     }
