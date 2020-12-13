@@ -1,4 +1,5 @@
-﻿using Grpc.Net.Client;
+﻿using Grpc.Core;
+using Grpc.Net.Client;
 using ProductGrpc.Protos;
 using System;
 using System.Threading;
@@ -25,13 +26,10 @@ namespace ProductGrpcClient
             Console.WriteLine("GetProductAsync response: " + response.ToString());
 
             Console.WriteLine("GetAllProducts started...");
-            using (var clientData = client.GetAllProducts(new GetAllProductsRequest()))
+            using var clientData = client.GetAllProducts(new GetAllProductsRequest());
+            await foreach (var responseData in clientData.ResponseStream.ReadAllAsync())
             {
-                while (await clientData.ResponseStream.MoveNext(new CancellationToken()))
-                {
-                    ProductModel currentProduct = clientData.ResponseStream.Current;
-                    Console.WriteLine(currentProduct);
-                }
+                Console.WriteLine(responseData);
             }
 
             Console.Read();
