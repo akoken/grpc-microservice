@@ -17,14 +17,14 @@ namespace ProductGrpcClient
             using var channel = GrpcChannel.ForAddress("https://localhost:5001");
             var client = new ProductProtoService.ProductProtoServiceClient(channel);
 
-            Console.WriteLine("GetProductAsync started...");
-            var response = await client.GetProductAsync(new GetProductRequest
-            {
-                ProductId = 1
-            });
+            await GetProductAsync(client);
+            await GetAllProducts(client);
 
-            Console.WriteLine("GetProductAsync response: " + response.ToString());
+            Console.Read();
+        }
 
+        private static async Task GetAllProducts(ProductProtoService.ProductProtoServiceClient client)
+        {
             Console.WriteLine("GetAllProducts started...");
             using var clientData = client.GetAllProducts(new GetAllProductsRequest());
             await foreach (var responseData in clientData.ResponseStream.ReadAllAsync())
@@ -32,7 +32,17 @@ namespace ProductGrpcClient
                 Console.WriteLine(responseData);
             }
 
-            Console.Read();
+        }
+
+        private static async Task GetProductAsync(ProductProtoService.ProductProtoServiceClient client)
+        {
+            Console.WriteLine("GetProductAsync started...");
+            var response = await client.GetProductAsync(new GetProductRequest
+            {
+                ProductId = 1
+            });
+
+            Console.WriteLine("GetProductAsync response: " + response.ToString());
         }
     }
 }
