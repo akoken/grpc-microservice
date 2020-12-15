@@ -3,6 +3,7 @@ using Grpc.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ProductGrpc.Data;
+using ProductGrpc.Models;
 using ProductGrpc.Protos;
 using System;
 using System.Threading.Tasks;
@@ -39,7 +40,7 @@ namespace ProductGrpc.Services
                 Name = product.Name,
                 Description = product.Description,
                 Price = (float)product.Price,
-                Status = ProductStatus.InStock,
+                Status = Protos.ProductStatus.InStock,
                 CreatedDate = Timestamp.FromDateTime(product.CreatedDate)
             };
 
@@ -58,12 +59,40 @@ namespace ProductGrpc.Services
                     Name = product.Name,
                     Description = product.Description,
                     Price = (float)product.Price,
-                    Status = ProductStatus.InStock,
+                    Status = Protos.ProductStatus.InStock,
                     CreatedDate = Timestamp.FromDateTime(product.CreatedDate)
                 };
 
                 await responseStream.WriteAsync(productModel);
             }
+        }
+
+        public override async Task<ProductModel> AddProduct(AddProductRequest request, ServerCallContext context)
+        {
+            var product = new Product
+            {
+                ProductId = request.Product.ProductId,
+                Name = request.Product.Name,
+                Description = request.Product.Description,
+                Price = (decimal)request.Product.Price,
+                Status = (Models.ProductStatus)request.Product.Status,
+                CreatedDate = request.Product.CreatedDate.ToDateTime()
+            };
+
+            await _productContext.Product.AddAsync(product);
+            await _productContext.SaveChangesAsync();
+
+            var productModel = new ProductModel
+            {
+                ProductId = product.ProductId,
+                Name = product.Name,
+                Description = product.Description,
+                Price = (float)product.Price,
+                Status = (Protos.ProductStatus)product.Status,
+                CreatedDate = Timestamp.FromDateTime(product.CreatedDate)
+            };
+
+            return productModel;
         }
     }
 }
