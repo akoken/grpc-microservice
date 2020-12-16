@@ -32,7 +32,6 @@ namespace ProductGrpcClient
             {
                 Console.WriteLine(responseData);
             }
-
         }
 
         private static async Task GetProductAsync(ProductProtoService.ProductProtoServiceClient client)
