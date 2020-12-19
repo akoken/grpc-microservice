@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ProductGrpc.Enumerations
+﻿namespace ProductGrpc.Enumerations
 {
     public enum ProductStatus
     {
