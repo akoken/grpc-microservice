@@ -1,4 +1,5 @@
-﻿using ProductGrpc.Models;
+﻿using ProductGrpc.Enumerations;
+using ProductGrpc.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace ProductGrpc.Data
                         Status = ProductStatus.InStock,
                         CreatedDate = DateTime.UtcNow
                     },
-                    new Product
+                    new Product 
                     {
                         ProductId = 2,
                         Name = "P40",

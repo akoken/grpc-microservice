@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProductGrpc.Enumerations;
+using System;
 
 namespace ProductGrpc.Models
 {
@@ -16,14 +17,5 @@ namespace ProductGrpc.Models
         public ProductStatus Status { get; set; }
 
         public DateTime CreatedDate { get; set; }
-    }
-
-    public enum ProductStatus
-    {
-        None = 0,
-
-        InStock = 1,
-
-        Low = 2
-    }
+    }    
 }
