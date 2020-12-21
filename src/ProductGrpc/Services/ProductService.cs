@@ -37,14 +37,14 @@ namespace ProductGrpc.Services
                 //throw grpc exception
             }
 
-            return _mapper.Map<ProductModel>(product);            
+            return _mapper.Map<ProductModel>(product);
         }
 
         public override async Task GetAllProducts(GetAllProductsRequest request, IServerStreamWriter<ProductModel> responseStream, ServerCallContext context)
         {
             var productList = await _productContext.Product.ToListAsync();
 
-            foreach (var product in productList)        
+            foreach (var product in productList)
             {
                 var productModel = _mapper.Map<ProductModel>(product);
                 await responseStream.WriteAsync(productModel);
@@ -58,7 +58,31 @@ namespace ProductGrpc.Services
             await _productContext.Product.AddAsync(product);
             await _productContext.SaveChangesAsync();
 
-            return _mapper.Map<ProductModel>(product);            
+            return _mapper.Map<ProductModel>(product);
+        }
+
+        public override async Task<ProductModel> UpdateProduct(UpdateProductRequest request, ServerCallContext context)
+        {
+            var product = _mapper.Map<Product>(request.Product);
+
+            bool isExist = await _productContext.Product.AnyAsync(p => p.ProductId == product.ProductId);
+            if (!isExist)
+            {
+                //throw grpc exception
+            }
+
+            _productContext.Entry(product).State = EntityState.Modified;
+
+            try
+            {
+                await _productContext.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+
+            return _mapper.Map<ProductModel>(product);
         }
     }
 }
