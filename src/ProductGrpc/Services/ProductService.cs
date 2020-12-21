@@ -84,5 +84,23 @@ namespace ProductGrpc.Services
 
             return _mapper.Map<ProductModel>(product);
         }
+
+        public override async Task<DeleteProductResponse> DeleteProduct(DeleteProductRequest request, ServerCallContext context)
+        {
+            Product product = await _productContext.Product.FindAsync(request.ProductId);
+            if(product == null)
+            {
+                //throw grpc exception
+            }
+
+            _productContext.Product.Remove(product);
+            int deleteCount = await _productContext.SaveChangesAsync();
+
+            return new DeleteProductResponse
+            {
+                Success = deleteCount > 0
+            };
+        }
+
     }
 }
