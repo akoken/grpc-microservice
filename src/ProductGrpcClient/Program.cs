@@ -22,7 +22,7 @@ namespace ProductGrpcClient
             await GetAllProducts(client);
             await AddProductAsync(client);
             Console.Read();
-        }      
+        }
 
         private static async Task GetAllProducts(ProductProtoService.ProductProtoServiceClient client)
         {
