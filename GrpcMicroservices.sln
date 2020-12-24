@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductGrpc", "src\ProductG
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductGrpcClient", "src\ProductGrpcClient\ProductGrpcClient.csproj", "{208F8629-3EE1-41EB-8594-3CDD953068CC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductWorkerService", "src\ProductWorkerService\ProductWorkerService.csproj", "{C9E9BBCD-1406-4B9B-86EC-2117CBACC0C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{208F8629-3EE1-41EB-8594-3CDD953068CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{208F8629-3EE1-41EB-8594-3CDD953068CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{208F8629-3EE1-41EB-8594-3CDD953068CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9E9BBCD-1406-4B9B-86EC-2117CBACC0C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9E9BBCD-1406-4B9B-86EC-2117CBACC0C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9E9BBCD-1406-4B9B-86EC-2117CBACC0C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9E9BBCD-1406-4B9B-86EC-2117CBACC0C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
