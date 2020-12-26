@@ -14,11 +14,13 @@ namespace ProductWorkerService
     {
         private readonly ILogger<Worker> _logger;
         private readonly IConfiguration _config;
+        private readonly ProductFactory _productFactory;
 
-        public Worker(ILogger<Worker> logger, IConfiguration configuration)
+        public Worker(ILogger<Worker> logger, IConfiguration config, ProductFactory productFactory)
         {
-            _logger = logger;
-            _config = configuration;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _config = config ?? throw new ArgumentNullException(nameof(config));
+            _productFactory = productFactory ?? throw new ArgumentNullException(nameof(productFactory));
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -33,20 +35,9 @@ namespace ProductWorkerService
                 using var channel = GrpcChannel.ForAddress(_config.GetValue<string>("WorkerService:ServiceUrl"));
                 var client = new ProductProtoService.ProductProtoServiceClient(channel);
 
-                Console.WriteLine("AddProductAsync started...");
-                var response = await client.AddProductAsync(new AddProductRequest
-                {
-                    Product = new ProductModel
-                    {
-                        Name = _config.GetValue<string>("WorkerService:ProductName") + DateTime.Now,
-                        Description = "New Red Phone Mi10T",
-                        Price = 699,
-                        Status = ProductStatus.InStock,
-                        CreatedDate = Timestamp.FromDateTime(DateTime.UtcNow)
-                    }
-                });
-
-                Console.WriteLine("AddProductAsync response: " + response.ToString());
+                _logger.LogInformation("AddProductAsync started...");
+                ProductModel response = await client.AddProductAsync(await _productFactory.Generate());
+                _logger.LogInformation("AddProductAsync response: " + response.ToString());
 
                 await Task.Delay(_config.GetValue<int>("WorkerService:TaskInterval"), stoppingToken);
             }
