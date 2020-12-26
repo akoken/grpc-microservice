@@ -1,3 +1,4 @@
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Net.Client;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -32,13 +33,20 @@ namespace ProductWorkerService
                 using var channel = GrpcChannel.ForAddress(_config.GetValue<string>("WorkerService:ServiceUrl"));
                 var client = new ProductProtoService.ProductProtoServiceClient(channel);
 
-                Console.WriteLine("GetProductAsync started...");
-                var response = await client.GetProductAsync(new GetProductRequest
+                Console.WriteLine("AddProductAsync started...");
+                var response = await client.AddProductAsync(new AddProductRequest
                 {
-                    ProductId = 1
+                    Product = new ProductModel
+                    {
+                        Name = _config.GetValue<string>("WorkerService:ProductName") + DateTime.Now,
+                        Description = "New Red Phone Mi10T",
+                        Price = 699,
+                        Status = ProductStatus.InStock,
+                        CreatedDate = Timestamp.FromDateTime(DateTime.UtcNow)
+                    }
                 });
 
-                Console.WriteLine("GetProductAsync response: " + response.ToString());
+                Console.WriteLine("AddProductAsync response: " + response.ToString());
 
                 await Task.Delay(_config.GetValue<int>("WorkerService:TaskInterval"), stoppingToken);
             }
