@@ -20,6 +20,7 @@ namespace ProductGrpc
             {
                 opt.EnableDetailedErrors = true;
             });
+
             services.AddDbContext<ProductContext>(options =>
             {
                 options.UseInMemoryDatabase("Product");
