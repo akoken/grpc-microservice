@@ -5,13 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.34.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Protos\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
 </Project>
