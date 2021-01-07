@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Grpc.Core;
@@ -26,7 +27,6 @@ namespace ShoppingCartGrpc.Services
         public override async Task<ShoppingCartModel> GetShoppingCart(GetShoppingCartRequest request, ServerCallContext context)
         {
             var shoppingCart = await _shoppingCartContext.ShoppingCart.FirstOrDefaultAsync(p => p.UserName == request.Username);
-
             if(shoppingCart == null)
             {
                 throw new RpcException(new Status(StatusCode.NotFound, $"ShoppingCart with UserName={request.Username}"));
@@ -51,6 +51,26 @@ namespace ShoppingCartGrpc.Services
             _logger.LogInformation("ShoppingCart is successfully created. Username: {userName}", shoppingCart.UserName);
 
             return _mapper.Map<ShoppingCartModel>(shoppingCart);
+        }
+
+        public override async Task<RemoveItemFromShoppingCartResponse> RemoveItemFromShoppingCart(RemoveItemFromShoppingCartRequest request, ServerCallContext context)
+        {
+            var shoppingCart = await _shoppingCartContext.ShoppingCart.FirstOrDefaultAsync(p => p.UserName == request.Username);
+            if (shoppingCart == null)
+            {
+                throw new RpcException(new Status(StatusCode.NotFound, $"ShoppingCart with UserName={request.Username}"));
+            }
+
+            ShoppingCartItem removeCartItem = shoppingCart.Items.FirstOrDefault(p => p.ProductId == request.RemoveCartItem.ProductId);
+            if(removeCartItem == null)
+            {
+                throw new RpcException(new Status(StatusCode.NotFound, $"CartItem with ProductId={request.RemoveCartItem.ProductId}"));
+            }
+
+            shoppingCart.Items.Remove(removeCartItem);
+            int removeCount = await _shoppingCartContext.SaveChangesAsync();
+
+            return new RemoveItemFromShoppingCartResponse { Success = removeCount > 0 };
         }
     }
 }
