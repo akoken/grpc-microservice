@@ -46,6 +46,7 @@ namespace ShoppingCartGrpc.Services
             }
 
             _shoppingCartContext.ShoppingCart.Add(shoppingCart);
+
             await _shoppingCartContext.SaveChangesAsync();
 
             _logger.LogInformation("ShoppingCart is successfully created. Username: {userName}", shoppingCart.UserName);
@@ -68,6 +69,7 @@ namespace ShoppingCartGrpc.Services
             }
 
             shoppingCart.Items.Remove(removeCartItem);
+
             int removeCount = await _shoppingCartContext.SaveChangesAsync();
 
             return new RemoveItemFromShoppingCartResponse { Success = removeCount > 0 };
