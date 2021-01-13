@@ -6,11 +6,6 @@
 
   <ItemGroup>
     <Protobuf Include="Protos\discount.proto" GrpcServices="Server">
-      <Access></Access>
-      <ProtoCompile></ProtoCompile>
-      <CompileOutputs></CompileOutputs>
-      <OutputDir></OutputDir>
-      <Generator>MSBuild:Compile</Generator>
     </Protobuf>
   </ItemGroup>
 
