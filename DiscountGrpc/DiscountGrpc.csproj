@@ -5,7 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\discount.proto" GrpcServices="Server">
+      <Access></Access>
+      <ProtoCompile></ProtoCompile>
+      <CompileOutputs></CompileOutputs>
+      <OutputDir></OutputDir>
+      <Generator>MSBuild:Compile</Generator>
+    </Protobuf>
   </ItemGroup>
 
   <ItemGroup>
@@ -15,5 +21,9 @@
   <ItemGroup>
     <Folder Include="Model\" />
     <Folder Include="Data\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Protos\discount.proto" />
   </ItemGroup>
 </Project>
