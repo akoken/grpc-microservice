@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCartGrpc", "src\Sho
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Discount", "Discount", "{37CF7873-FBFF-4092-BAFE-772917DB0F76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscountGrpc", "DiscountGrpc\DiscountGrpc.csproj", "{A496C43A-9CDB-47ED-975D-D3978930594F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscountGrpc", "src\DiscountGrpc\DiscountGrpc.csproj", "{A496C43A-9CDB-47ED-975D-D3978930594F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
