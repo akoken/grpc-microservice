@@ -14,12 +14,14 @@ namespace ShoppingCartGrpc.Services
     public class ShoppingCartService : ShoppingCartProtoService.ShoppingCartProtoServiceBase
     {
         private readonly ShoppingCartContext _shoppingCartContext;
+        private readonly DiscountService _discountService;
         private readonly ILogger<ShoppingCartService> _logger;
         private readonly IMapper _mapper;
 
-        public ShoppingCartService(ShoppingCartContext shoppingCartContext, ILogger<ShoppingCartService> logger, IMapper mapper)
+        public ShoppingCartService(ShoppingCartContext shoppingCartContext, DiscountService discountService, ILogger<ShoppingCartService> logger, IMapper mapper)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _discountService = discountService ?? throw new ArgumentNullException(nameof(discountService));
             _shoppingCartContext = shoppingCartContext ?? throw new ArgumentNullException(nameof(shoppingCartContext));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
@@ -94,8 +96,8 @@ namespace ShoppingCartGrpc.Services
                 }
                 else
                 {
-                    decimal discount = 100;
-                    newAddedCartItem.Price -= discount;
+                    var discount = await _discountService.GetDiscount(requestStream.Current.DiscountCode);
+                    newAddedCartItem.Price -= discount.Amount;
                     shoppingCart.Items.Add(newAddedCartItem);
                 }
             }
@@ -106,6 +108,7 @@ namespace ShoppingCartGrpc.Services
                 InsertCount = insertCount,
                 Success = insertCount > 0
             };
+
             return response;
         }
     }
