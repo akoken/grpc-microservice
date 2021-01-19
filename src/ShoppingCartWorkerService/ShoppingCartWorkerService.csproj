@@ -19,4 +19,9 @@
       <Link>Protos\product.proto</Link>
     </Protobuf>
   </ItemGroup>
+    <ItemGroup>
+    <Protobuf Include="..\ShoppingCart\ShoppingCartGrpc\Protos\shoppingcart.proto" GrpcServices="Client">
+      <Link>Protos\shoppingcart.proto</Link>
+    </Protobuf>
+  </ItemGroup>
 </Project>
