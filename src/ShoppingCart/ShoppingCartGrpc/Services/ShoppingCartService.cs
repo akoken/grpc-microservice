@@ -80,6 +80,7 @@ namespace ShoppingCartGrpc.Services
             return new RemoveItemFromShoppingCartResponse { Success = removeCount > 0 };
         }
 
+        [AllowAnonymous]
         public override async Task<AddItemToShoppingCartResponse> AddItemToShoppingCart(IAsyncStreamReader<AddItemToShoppingCartRequest> requestStream, ServerCallContext context)
         {
 
