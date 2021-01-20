@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Grpc.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ShoppingCartGrpc.Data;
@@ -11,6 +12,7 @@ using ShoppingCartGrpc.Protos;
 
 namespace ShoppingCartGrpc.Services
 {
+    [Authorize]
     public class ShoppingCartService : ShoppingCartProtoService.ShoppingCartProtoServiceBase
     {
         private readonly ShoppingCartContext _shoppingCartContext;
@@ -56,6 +58,7 @@ namespace ShoppingCartGrpc.Services
             return _mapper.Map<ShoppingCartModel>(shoppingCart);
         }
 
+        [AllowAnonymous]
         public override async Task<RemoveItemFromShoppingCartResponse> RemoveItemFromShoppingCart(RemoveItemFromShoppingCartRequest request, ServerCallContext context)
         {
             var shoppingCart = await _shoppingCartContext.ShoppingCart.FirstOrDefaultAsync(p => p.UserName == request.Username);

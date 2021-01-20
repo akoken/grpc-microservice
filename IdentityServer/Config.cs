@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
 
@@ -18,7 +16,8 @@ namespace IdentityServer
                     ClientSecrets =
                     {
                         new Secret("secret".Sha256())
-                    }
+                    },
+                    AllowedScopes = {"ShoppingCartAPI"}
                 }
             };
 
