@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductGrpc", "src\ProductGrpc\ProductGrpc.csproj", "{66262B44-3432-4686-AAEF-0B3A00E212A4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductGrpc", "src\Product\ProductGrpc\ProductGrpc.csproj", "{66262B44-3432-4686-AAEF-0B3A00E212A4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductGrpcClient", "src\ProductGrpcClient\ProductGrpcClient.csproj", "{208F8629-3EE1-41EB-8594-3CDD953068CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductGrpcClient", "src\Product\ProductGrpcClient\ProductGrpcClient.csproj", "{208F8629-3EE1-41EB-8594-3CDD953068CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductWorkerService", "src\ProductWorkerService\ProductWorkerService.csproj", "{C9E9BBCD-1406-4B9B-86EC-2117CBACC0C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductWorkerService", "src\Product\ProductWorkerService\ProductWorkerService.csproj", "{C9E9BBCD-1406-4B9B-86EC-2117CBACC0C3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Product", "Product", "{AC8DCFC0-9F96-4310-AA18-BC68CAA41CB0}"
 EndProject
@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Discount", "Discount", "{37
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscountGrpc", "src\DiscountGrpc\DiscountGrpc.csproj", "{A496C43A-9CDB-47ED-975D-D3978930594F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCartWorkerService", "src\ShoppingCartWorkerService\ShoppingCartWorkerService.csproj", "{35C02104-2156-49D0-93E5-FD31E2B4047C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCartWorkerService", "src\ShoppingCart\ShoppingCartWorkerService\ShoppingCartWorkerService.csproj", "{35C02104-2156-49D0-93E5-FD31E2B4047C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentication", "{03FF71B5-E125-4E02-8022-E4AC6817F653}"
 EndProject
